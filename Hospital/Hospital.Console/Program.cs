@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Hospital.Console.Configuration;
+
+var config = Bootstrap.GetConfiguration();
+var host = Bootstrap.GetHost(config, args);
+
+Bootstrap.Run(config, host);

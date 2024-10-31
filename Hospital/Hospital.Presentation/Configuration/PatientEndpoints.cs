@@ -13,7 +13,7 @@ namespace Hospital.Presentation.Configuration
         public static void MapPatientEndpoints(this WebApplication app)
         {
             app.MapGet("/patients/{id:guid}", GetById)
-                            .WithTags("Get Patient By Id");
+                .WithTags("Get Patient By Id");
 
             app.MapGet("/patients", List)
                 .WithTags("List Patients");

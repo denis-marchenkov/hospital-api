@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hospital.Application\Hospital.Application.csproj" />
+    <ProjectReference Include="..\Hospital.Console\Hospital.Console.csproj" />
     <ProjectReference Include="..\Hospital.Domain\Hospital.Domain.csproj" />
   </ItemGroup>
 
