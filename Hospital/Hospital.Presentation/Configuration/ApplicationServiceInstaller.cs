@@ -1,4 +1,5 @@
-﻿using Hospital.Domain.Contracts;
+﻿using Hospital.Application.Patients.Queries.List;
+using Hospital.Domain.Contracts;
 using Hospital.Persistence.Repository;
 using Microsoft.OpenApi.Models;
 
@@ -15,6 +16,7 @@ namespace Hospital.Presentation.Configuration
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ListPatientsQuery).Assembly));
         }
     }
 }
