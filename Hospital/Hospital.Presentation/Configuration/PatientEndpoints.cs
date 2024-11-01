@@ -145,8 +145,9 @@ namespace Hospital.Presentation.Configuration
 
             var queryParams = queryStringParser.ParseQueryString(queryString);
 
-
-            var filters = queryParams.Select(x => searchFilterProvider.GetFilter(x.Item1, x.Item2));
+            var filters = queryParams
+                          .Select(x => (ISearchFilter<Patient>)searchFilterProvider.GetFilter(x.Item1, x.Item2))
+                          .ToList();
 
             var result = await mediator.Send(new ListPatientsQuery() { Filters = filters });
 

@@ -1,4 +1,5 @@
 ﻿using Hospital.Domain.Contracts;
+using Hospital.Domain.Search.Filters.PatientFilters;
 
 namespace Hospital.Domain.Search.FilterParsers
 {
@@ -6,7 +7,7 @@ namespace Hospital.Domain.Search.FilterParsers
     {
         public string Name => "birthdate";
 
-        public SearchFilter Parse(string value)
+        public ISearchFilter Parse(string value)
         {
             var operators = SearchOperatorExtensions.GetAllOperatorStrings();
             var strOp = SearchOperatorExtensions.ExtractOperator(value);
@@ -18,7 +19,7 @@ namespace Hospital.Domain.Search.FilterParsers
                 throw new ArgumentException("Invalid DateTime format.");
             }
 
-            return new SearchFilter { Field = Name, Operator = op, Value = dateTimeValue };
+            return new BirthDateFilter { Field = Name, Operator = op, Value = dateTimeValue };
         }
     }
 }

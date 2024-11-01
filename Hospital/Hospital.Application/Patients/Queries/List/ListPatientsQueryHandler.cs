@@ -1,7 +1,6 @@
 ﻿using Hospital.Application.Infrastructure;
 using Hospital.Domain.Contracts;
 using Hospital.Domain.Entities;
-using Hospital.Domain.Search.FilterExpressions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -28,7 +27,7 @@ namespace Hospital.Application.Patients.Queries.List
                 {
                     foreach (var filter in request.Filters)
                     {
-                        result = FilterExpressions.ApplyFilter(result, filter);
+                        result = filter.Apply(result);
                     }
                 }
 

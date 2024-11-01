@@ -29,7 +29,7 @@ namespace Hospital.Domain.Search
             _parsers = parsers;
         }
 
-        public SearchFilter GetFilter(string queryKey, string queryValue)
+        public ISearchFilter GetFilter(string queryKey, string queryValue)
         {
             if (_parsers == null || !_parsers.Any())
             {

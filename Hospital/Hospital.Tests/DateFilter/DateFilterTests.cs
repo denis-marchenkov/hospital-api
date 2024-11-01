@@ -1,6 +1,6 @@
 ﻿using Hospital.Domain.Entities;
-using Hospital.Domain.Search.FilterExpressions;
 using Hospital.Domain.Search;
+using Hospital.Domain.Search.Filters.PatientFilters;
 
 
 // Test cases: https://www.hl7.org/fhir/search.html#date
@@ -27,7 +27,7 @@ namespace Hospital.Tests.DateFilter
         [TestCase("2013-01-14T10:00")]
         public void ApplyFilter_ShouldReturnResult_WhenEq(string dateStr)
         {
-            var filter = new SearchFilter
+            var filter = new BirthDateFilter
             {
                 Field = "birthdate",
                 Operator = SearchOperator.Eq,
@@ -48,7 +48,7 @@ namespace Hospital.Tests.DateFilter
             var query = GeneratePatients(dates).AsQueryable();
 
 
-            var result = FilterExpressions.ApplyFilter(query, filter).ToList();
+            var result = filter.Apply(query).ToList();
 
             Assert.That(result.Count, Is.EqualTo(3));
             Assert.That(result.First().BirthDate, Is.Not.EqualTo(DateTime.Parse("2013-01-15T00:00")));
@@ -60,7 +60,7 @@ namespace Hospital.Tests.DateFilter
         [TestCase("2013-01-14")]
         public void ApplyFilter_ShouldReturnResult_WhenNe(string dateStr)
         {
-            var filter = new SearchFilter
+            var filter = new BirthDateFilter
             {
                 Field = "birthdate",
                 Operator = SearchOperator.Ne,
@@ -80,7 +80,7 @@ namespace Hospital.Tests.DateFilter
             var query = GeneratePatients(dates).AsQueryable();
 
 
-            var result = FilterExpressions.ApplyFilter(query, filter).ToList();
+            var result = filter.Apply(query).ToList();
 
             Assert.That(result.Count, Is.EqualTo(1));
             Assert.That(result.First().BirthDate, Is.EqualTo(DateTime.Parse("2013-01-15T00:00")));
@@ -90,7 +90,7 @@ namespace Hospital.Tests.DateFilter
         [TestCase("2013-01-14T10:00")]
         public void ApplyFilter_ShouldReturnResult_WhenTimeSpecified_And_Lt(string dateStr)
         {
-            var filter = new SearchFilter
+            var filter = new BirthDateFilter
             {
                 Field = "birthdate",
                 Operator = SearchOperator.Lt,
@@ -108,13 +108,13 @@ namespace Hospital.Tests.DateFilter
 
                 // not match
                 "2013-01-15T12:00",
-                "2013-01-16",
+                "2013-01-16"
             };
 
             var query = GeneratePatients(dates).AsQueryable();
 
 
-            var result = FilterExpressions.ApplyFilter(query, filter).ToList();
+            var result = filter.Apply(query).ToList();
 
             Assert.That(result.Count, Is.EqualTo(5));
 
@@ -128,7 +128,7 @@ namespace Hospital.Tests.DateFilter
         [TestCase("2013-01-14T10:00")]
         public void ApplyFilter_ShouldReturnResult_WhenTimeSpecified_And_Gt(string dateStr)
         {
-            var filter = new SearchFilter
+            var filter = new BirthDateFilter
             {
                 Field = "birthdate",
                 Operator = SearchOperator.Gt,
@@ -145,13 +145,13 @@ namespace Hospital.Tests.DateFilter
 
                 // not match
                 "2013-01-11T00:00",
-                "2013-01-14",
+                "2013-01-14"
             };
 
             var query = GeneratePatients(dates).AsQueryable();
 
 
-            var result = FilterExpressions.ApplyFilter(query, filter).ToList();
+            var result = filter.Apply(query).ToList();
 
             Assert.That(result.Count, Is.EqualTo(4));
 
@@ -161,5 +161,77 @@ namespace Hospital.Tests.DateFilter
             }
         }
 
+        [Test]
+        [TestCase("2013-03-14T10:00")]
+        public void ApplyFilter_ShouldReturnResult_WhenTimeSpecified_And_Ge(string dateStr)
+        {
+            var filter = new BirthDateFilter
+            {
+                Field = "birthdate",
+                Operator = SearchOperator.Ge,
+                Value = dateStr
+            };
+
+            // todo: is there a typo in specification? "from 21-Jan 2013 onwards" - how can it come AFTER 14-Mar 2013
+            var dates = new[]
+            {
+                // match
+                "2013-03-14T10:00",
+                "2013-03-15",
+                "2013-03-15T00:00",
+
+                // not match
+                "2013-03-14",
+                "2013-03-14T08:00"
+            };
+
+            var query = GeneratePatients(dates).AsQueryable();
+
+
+            var result = filter.Apply(query).ToList();
+
+            Assert.That(result.Count, Is.EqualTo(3));
+
+            foreach (var d in dates.Take(3))
+            {
+                Assert.That(result.Any(x => x.BirthDate == DateTime.Parse(d)), Is.True);
+            }
+        }
+
+        [Test]
+        [TestCase("2013-03-14T10:00")]
+        public void ApplyFilter_ShouldReturnResult_WhenTimeSpecified_And_Le(string dateStr)
+        {
+            var filter = new BirthDateFilter
+            {
+                Field = "birthdate",
+                Operator = SearchOperator.Le,
+                Value = dateStr
+            };
+
+            var dates = new[]
+            {
+                // match
+                "2013-03-14T10:00",
+                "2013-03-13",
+                "2013-01-21",
+
+                // not match
+                "2013-03-14T11:00",
+                "2013-03-15"
+            };
+
+            var query = GeneratePatients(dates).AsQueryable();
+
+
+            var result = filter.Apply(query).ToList();
+
+            Assert.That(result.Count, Is.EqualTo(3));
+
+            foreach (var d in dates.Take(3))
+            {
+                Assert.That(result.Any(x => x.BirthDate == DateTime.Parse(d)), Is.True);
+            }
+        }
     }
 }
