@@ -4,9 +4,9 @@ namespace Hospital.Domain.Contracts
 {
     public interface ISearchFilter
     {
-        public string Field { get; set; }
-        public SearchOperator Operator { get; set; }
-        public object Value { get; set; }
+        public string Name { get; }
+        public SearchOperator Operator { get; }
+        public object Value { get; }
 
     }
 

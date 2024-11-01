@@ -13,6 +13,23 @@ namespace Hospital.Console.Configuration
     {
         public static void SeedDb(IHost host, IConfiguration configuration, int amount = 100)
         {
+            // predetermined dates for easier api testing
+            var dates = ReadDates();
+
+            Func<Faker, int, DateTime> GetDate = (Faker fake, int i) =>
+            {
+                if (dates != null && dates.Count > 0)
+                {
+                    try
+                    {
+                        return DateTime.Parse(dates[i]);
+                    }
+                    catch { }
+                }
+
+                return fake.Date.Past(30);
+            };
+
             using (var scope = host.Services.CreateScope())
             {
                 try
@@ -28,7 +45,7 @@ namespace Hospital.Console.Configuration
                         var patient = new Faker<Patient>()
                             .RuleFor(p => p.Id, f => PatientId.New())
                             .RuleFor(p => p.Gender, f => f.PickRandom<Gender>())
-                            .RuleFor(p => p.BirthDate, f => f.Date.Past(30))
+                            .RuleFor(p => p.BirthDate, f => GetDate(f, i))
                             .RuleFor(p => p.Active, f => f.Random.Bool())
                             .Generate();
 
@@ -98,6 +115,22 @@ namespace Hospital.Console.Configuration
             {
                 System.Console.WriteLine($"An error occurred: {ex.Message}");
             }
+        }
+
+        private static List<string> ReadDates()
+        {
+            var dates = new List<string>();
+            try
+            {
+                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dates.txt");
+                dates = File.ReadAllLines(filePath).ToList();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"An error occurred while reading the file: {ex.Message}");
+            }
+
+            return dates;
         }
     }
 }

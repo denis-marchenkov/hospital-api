@@ -19,7 +19,7 @@ namespace Hospital.Domain.Search.FilterParsers
                 throw new ArgumentException("Invalid DateTime format.");
             }
 
-            return new BirthDateFilter { Field = Name, Operator = op, Value = dateTimeValue };
+            return new BirthDateFilter(Name, op, dateTimeValue);
         }
     }
 }

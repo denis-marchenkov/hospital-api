@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Hospital.Persistence\Hospital.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="dates.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

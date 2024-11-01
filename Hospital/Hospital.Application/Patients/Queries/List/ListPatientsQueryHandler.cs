@@ -31,7 +31,7 @@ namespace Hospital.Application.Patients.Queries.List
                     }
                 }
 
-                return Task.FromResult(CqrsResult<List<Patient>>.Success(result.ToList()));
+                return Task.FromResult(CqrsResult<List<Patient>>.Success(result.OrderBy(x => x.BirthDate).ToList()));
             }
             catch (Exception ex)
             {
