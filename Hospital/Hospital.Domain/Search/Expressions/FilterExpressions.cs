@@ -13,10 +13,22 @@ namespace Hospital.Domain.Search.FilterExpressions
             {
                 "birthdate", new Dictionary<SearchOperator, FilterExpressionDelegate>
                 {
-                    { SearchOperator.Eq, filter => p => p.BirthDate.Date == DateParser.ParseDate(filter.Value.ToString()).Date },
-                    { SearchOperator.Ne, filter => p => p.BirthDate.Date != DateParser.ParseDate(filter.Value.ToString()).Date },
-                    //{ SearchOperator.Gt, filter => p => p.BirthDate > Convert.ToDateTime(filter.Value) },
-                    //{ SearchOperator.Lt, filter => p => p.BirthDate < Convert.ToDateTime(filter.Value) },
+                    { SearchOperator.Eq, filter => p => p.BirthDate.Date == filter.DateTime.Date },
+                    { SearchOperator.Ne, filter => p => p.BirthDate.Date != filter.DateTime.Date },
+                    {
+                        SearchOperator.Gt,
+                        filter => p =>
+                        (p.BirthDate.Date == filter.DateTime.Date && p.BirthDate > filter.DateTime)                               ||      // same date after the specified time
+                        (p.BirthDate.Date == filter.DateTime.Date.AddDays(-1) && p.BirthDate.TimeOfDay >= TimeSpan.FromHours(12)) ||      // day before and time is after noon
+                        (p.BirthDate.Date > filter.DateTime.Date)                                                                         // any date after the specified date
+                    },
+                    { SearchOperator.Lt,
+                        filter => p =>
+                        (p.BirthDate.Date == filter.DateTime.Date && p.BirthDate.TimeOfDay <= TimeSpan.FromHours(12))                   ||  // same date before or equal to noon
+                        (p.BirthDate.Date == filter.DateTime.Date.AddDays(-1) && p.BirthDate.TimeOfDay < TimeSpan.FromHours(12))        ||  // day before and time before noon
+                        (p.BirthDate.Date == filter.DateTime.Date.AddDays(1) && p.BirthDate.TimeOfDay < filter.DateTime.TimeOfDay)      ||  // next day and time before the specified time
+                        (p.BirthDate.Date < filter.DateTime.Date)                                                                           // any date before the specified date
+                    }
                     //{ SearchOperator.Ge, filter => p => p.BirthDate >= Convert.ToDateTime(filter.Value) },
                     //{ SearchOperator.Le, filter => p => p.BirthDate <= Convert.ToDateTime(filter.Value) },
 

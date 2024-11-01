@@ -1,5 +1,4 @@
 ﻿using Hospital.Application.Infrastructure;
-using Hospital.Application.Patients.Commands.Create;
 using Hospital.Domain.Contracts;
 using Hospital.Domain.Entities;
 using Hospital.Domain.Search.FilterExpressions;
