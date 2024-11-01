@@ -36,11 +36,10 @@ namespace Hospital.Persistence.Repository
 
         public void Delete(Patient patient) => _dbContext.Patients.Remove(patient);
 
-        public async Task<IEnumerable<Patient>> ListAsync(CancellationToken cancellationToken) =>
-            await _dbContext.Patients
+        public IQueryable<Patient> Query() =>
+            _dbContext.Patients
                 .AsNoTracking()
                 .Include(patient => patient.Name)
-                .ThenInclude(name => name.Given)
-                .ToListAsync(cancellationToken);
+                .ThenInclude(name => name.Given);
     }
 }

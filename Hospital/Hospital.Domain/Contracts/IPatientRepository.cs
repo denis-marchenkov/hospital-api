@@ -10,6 +10,6 @@ namespace Hospital.Domain.Contracts
         public void Update(Patient patient);
         public void Delete(Patient patient);
 
-        public Task<IEnumerable<Patient>> ListAsync(CancellationToken cancellationToken);
+        public IQueryable<Patient> Query();
     }
 }

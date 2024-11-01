@@ -1,7 +1,10 @@
-﻿using Hospital.Application.Patients.Queries.List;
+﻿using Hospital.Application.Infrastructure;
+using Hospital.Application.Patients.Queries.List;
 using Hospital.Domain.Contracts;
+using Hospital.Domain.Search;
 using Hospital.Persistence.Repository;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace Hospital.Presentation.Configuration
 {
@@ -13,9 +16,23 @@ namespace Hospital.Presentation.Configuration
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hospital API", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                if (File.Exists(xmlPath))
+                {
+                    c.IncludeXmlComments(xmlPath);
+                }
+                else
+                {
+                    Console.WriteLine($"XML documentation file not found: {xmlPath}");
+                }
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<ISearchFilterProvider, SearchFilterProvider>();
+            services.AddSingleton<IQueryStringParser, QueryStringParser>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ListPatientsQuery).Assembly));
         }
     }

@@ -16,7 +16,7 @@ namespace Hospital.Tests.Queries
         [SetUp]
         public void Setup()
         {
-            _patientRepository.Setup(x => x.ListAsync(default)).Returns(Task.FromResult(Enumerable.Empty<Patient>()));
+            _patientRepository.Setup(x => x.Query()).Returns(Enumerable.Empty<Patient>().AsQueryable());
             _unitOfWorkMock.Setup(x => x.PatientRepository).Returns(_patientRepository.Object);
             _unitOfWorkMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()));
         }
