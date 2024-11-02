@@ -133,4 +133,4 @@ Swagger url also changed and mapped to 5000 port (TLS amended):
 
 <br/>
 
-- [Back To Top](table-of-contents)
+- [Back To Top](#table-of-contents)
