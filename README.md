@@ -51,7 +51,7 @@ Patient record:
 }
 ```
 
-![Database](https://github.com/denis-marchenkov/assets-dump/blob/master/hospital_database.png)
+![Database](https://github.com/denis-marchenkov/assets-dump/blob/2b9407f530bed9395f2ea58729445f5df6cc531d/hospital_database.png)
 
 # Installation
 
