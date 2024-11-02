@@ -3,23 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Presentation", "Hospital.Presentation\Hospital.Presentation.csproj", "{E4C43BA6-27D9-4524-9161-BD83921A0354}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital.Presentation", "Hospital.Presentation\Hospital.Presentation.csproj", "{E4C43BA6-27D9-4524-9161-BD83921A0354}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8A29C8EF-1DA7-4D91-A088-CB300166E479}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Tests", "Hospital.Tests\Hospital.Tests.csproj", "{BA104493-0EC7-4F02-B66A-10C1BAC09015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital.Tests", "Hospital.Tests\Hospital.Tests.csproj", "{BA104493-0EC7-4F02-B66A-10C1BAC09015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Application", "Hospital.Application\Hospital.Application.csproj", "{DD572BA2-3350-48C0-9B8D-94F281F45F12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital.Application", "Hospital.Application\Hospital.Application.csproj", "{DD572BA2-3350-48C0-9B8D-94F281F45F12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Domain", "Hospital.Domain\Hospital.Domain.csproj", "{6D4808B0-8E4B-4C71-9A76-DF10DF3C8D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital.Domain", "Hospital.Domain\Hospital.Domain.csproj", "{6D4808B0-8E4B-4C71-9A76-DF10DF3C8D48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Persistence", "Hospital.Persistence\Hospital.Persistence.csproj", "{6332EABA-93B9-4882-BDE2-69F0012B72C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital.Persistence", "Hospital.Persistence\Hospital.Persistence.csproj", "{6332EABA-93B9-4882-BDE2-69F0012B72C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Console", "Hospital.Console\Hospital.Console.csproj", "{C010ED37-3066-40C5-99C3-E7B3399BA16E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospital.Console", "Hospital.Console\Hospital.Console.csproj", "{C010ED37-3066-40C5-99C3-E7B3399BA16E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAAC0FD7-FE8F-40F8-A05F-2D10590501F3}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		Patients.postman_collection.json = Patients.postman_collection.json
 	EndProjectSection
 EndProject
 Global

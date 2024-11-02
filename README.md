@@ -31,6 +31,10 @@ Solution consists of 6 projects:
 
 <br/>
 
+There's a postman collection json file ```Patients.postman_collection.json``` available in root solution folder.
+
+<br/>
+
 # Data structure
 
 Patient record:

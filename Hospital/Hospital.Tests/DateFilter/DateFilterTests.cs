@@ -280,18 +280,17 @@ namespace Hospital.Tests.DateFilter
         {
             var filter = new BirthDateFilter("birthdate", SearchOperator.Ap, dateStr);
 
-            BirthDateFilter.Now = DateTime.Parse("2013-05-20");
-
             var dates = new[]
             {
                 // match
+                "2013-03-19",
+                "2013-03-09",
                 "2013-03-14",
-                "2013-03-08",
-                "2013-03-20",
 
                 // not match
+                "2013-03-08",
+                "2013-03-20",
                 "2013-01-21",
-                "2013-05-14"
 
             };
 

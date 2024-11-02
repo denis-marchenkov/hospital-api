@@ -12,14 +12,9 @@ namespace Hospital.Domain.Search.Filters.PatientFilters
         public SearchOperator Operator { get; }
         public object Value { get; }
 
-        // for ap search operator - approximate date is in 10% of the gap between now and the date
-        public static double ApproximationPercent { get; set; } = 0.1;
-        public static DateTime Now { get; set; } = DateTime.Now;
+        // since approximation is is at the discretion of the system lets say it is 5 days
+        public static double Approximation = 5;
 
-        public static double Gap(DateTime date)
-        {
-            return (Now - date).TotalDays * ApproximationPercent;
-        }
         public BirthDateFilter(string name, SearchOperator op, object value)
         {
             Name = name;
@@ -52,8 +47,8 @@ namespace Hospital.Domain.Search.Filters.PatientFilters
                 SearchOperator.Ap, filter => p =>
                     (p.BirthDate.Date == filter.Date)                         ||
                     (
-                        (p.BirthDate >= filter.AddDays( -Gap(filter) ) )      && // check if BirthDate falls into 10% gap around filter date
-                        (p.BirthDate <= filter.AddDays(  Gap(filter) ) )
+                        (p.BirthDate >= filter.AddDays( -Approximation ) )      &&
+                        (p.BirthDate <= filter.AddDays(  Approximation ) )
                     )
             }
         };

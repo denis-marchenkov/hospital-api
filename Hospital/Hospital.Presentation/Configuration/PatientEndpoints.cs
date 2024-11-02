@@ -33,7 +33,6 @@ namespace Hospital.Presentation.Configuration
                 .WithTags("Search for patient");
         }
 
-
         /// <summary>
         /// Get patient by ID
         /// </summary>

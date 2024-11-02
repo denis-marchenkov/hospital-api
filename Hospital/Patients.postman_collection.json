@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "a1d83dbf-b8b2-486f-b400-47cbe47d35dd",
+		"name": "Patients",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37879573"
+	},
+	"item": [
+		{
+			"name": "list all patients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get patient by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/c4a843e7-d75f-43c5-b6a1-bbed9caef8d5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"c4a843e7-d75f-43c5-b6a1-bbed9caef8d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete patient",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/d27bdd30-5800-4b4b-aa79-e610bcc94794",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"d27bdd30-5800-4b4b-aa79-e610bcc94794"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update patient",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": {\r\n    \"value\": \"c4a843e7-d75f-43c5-b6a1-bbed9caef8d5\"\r\n  },\r\n  \"use\": \"updated\",\r\n  \"family\": \"updated\",\r\n  \"givenNames\": [\r\n    \"updated1\",\r\n    \"updated2\"\r\n  ],\r\n  \"gender\": 1,\r\n  \"birthDate\": \"2000-11-02\",\r\n  \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/patients/c4a843e7-d75f-43c5-b6a1-bbed9caef8d5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"c4a843e7-d75f-43c5-b6a1-bbed9caef8d5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_eq",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=eq2003-05-04 09:56:18.796154",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=eq2003-05-04 09:56:18.796154"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_ne",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=ne2003-05-04 09:56:18.796154",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=ne2003-05-04 09:56:18.796154"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_gt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=gt2024-06-30 16:34:37.9817347",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=gt2024-06-30 16:34:37.9817347"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_lt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=lt1996-08-01 05:02:04.4106861",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=lt1996-08-01 05:02:04.4106861"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_ge",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=ge2024-06-30 16:34:37.9817347",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=ge2024-06-30 16:34:37.9817347"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_le",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=le1996-08-01 05:02:04.4106861",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=le1996-08-01 05:02:04.4106861"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_sa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=sa2024-06-30 16:34:37.9817347",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=sa2024-06-30 16:34:37.9817347"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_eb",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=eb2022-06-28 13:10:49.7249898",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=eb2022-06-28 13:10:49.7249898"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_ap",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=ap2022-06-28 13:10:49.7249898",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=ap2022-06-28 13:10:49.7249898"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filter_sa_eb",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/patients/search?queryString=birthDate=sa2017-02-08 18:52:54.6983409%26birthDate=eb2018-02-16 23:01:03.4635349",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "queryString",
+							"value": "birthDate=sa2017-02-08 18:52:54.6983409&birthDate=eb2018-02-16 23:01:03.4635349"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

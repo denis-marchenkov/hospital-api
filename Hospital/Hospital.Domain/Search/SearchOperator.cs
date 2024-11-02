@@ -13,8 +13,6 @@
         Eb,     // the resource value ends before the parameter value
 
         Ap      // the resource value is approximately the same to the parameter value
-                // recommended value for the approximation is 10% of the stated value
-                // (or for a date, 10% of the gap between now and the date)
     }
 
     public static class SearchOperatorExtensions
