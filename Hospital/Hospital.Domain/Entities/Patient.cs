@@ -1,5 +1,7 @@
-﻿using Hospital.Domain.Values;
+﻿using Hospital.Domain.Converters;
+using Hospital.Domain.Values;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Hospital.Domain.Entities
 {
@@ -7,6 +9,8 @@ namespace Hospital.Domain.Entities
     {
         public PatientId Id { get; private set; }
         public Name Name { get; private set; }
+
+        [JsonConverter(typeof(GenderEnumConverter))]
         public Gender Gender { get; private set; } = Gender.Unknown;
 
         [Required(ErrorMessage = "Date of Birth is required")]

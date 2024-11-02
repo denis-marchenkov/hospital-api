@@ -5,6 +5,7 @@ using Hospital.Domain.Search;
 using Hospital.Persistence.Repository;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Hospital.Presentation.Configuration
 {
@@ -34,6 +35,12 @@ namespace Hospital.Presentation.Configuration
             services.AddSingleton<ISearchFilterProvider, SearchFilterProvider>();
             services.AddSingleton<IQueryStringParser, QueryStringParser>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ListPatientsQuery).Assembly));
+
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
         }
     }
 }
