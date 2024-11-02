@@ -19,14 +19,16 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hospital.Application\Hospital.Application.csproj" />
     <ProjectReference Include="..\Hospital.Persistence\Hospital.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="dates.txt">
+    <None Update="patients_date_guid.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

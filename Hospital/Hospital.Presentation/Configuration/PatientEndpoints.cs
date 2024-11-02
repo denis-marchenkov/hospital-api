@@ -44,7 +44,7 @@ namespace Hospital.Presentation.Configuration
         {
             var result = await mediator.Send(new GetPatientByIdQuery(new PatientId(id)));
 
-            return result.IsSuccess ?
+            return result.IsSuccess && result.Value != null ?
                 Results.Ok(result) :
                 Results.NotFound(result);
         }
@@ -76,7 +76,7 @@ namespace Hospital.Presentation.Configuration
             var guid = result.Value.Value;
 
             return result.IsSuccess ?
-                Results.Created($"/patient/{guid}", new { id = guid }) :
+                Results.Created($"/patients/{guid}", new { id = guid }) :
                 Results.NotFound(result);
         }
 

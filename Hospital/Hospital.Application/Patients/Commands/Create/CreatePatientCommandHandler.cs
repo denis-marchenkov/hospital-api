@@ -33,7 +33,8 @@ namespace Hospital.Application.Patients.Commands.Create
                     given: request.GivenNames,
                     gender: request.Gender,
                     birthDate: request.BirthDate,
-                    active: request.Active
+                    active: request.Active,
+                    id: request.Id != null ? new PatientId(request.Id.Value) : null
                 );
 
                 _unitOfWork.PatientRepository.Create(patient);

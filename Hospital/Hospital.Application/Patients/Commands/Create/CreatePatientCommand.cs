@@ -17,5 +17,6 @@ namespace Hospital.Application.Patients.Commands.Create
         public Gender Gender { get; init; }
         public DateTime BirthDate { get; init; }
         public bool Active { get; init; } = true;
+        public Guid? Id { get; init; } = null;
     }
 }

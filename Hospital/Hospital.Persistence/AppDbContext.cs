@@ -47,46 +47,6 @@ namespace Hospital.Persistence
             modelBuilder.Entity<Patient>()
                 .Property(entity => entity.Gender)
                 .HasConversion<string>();
-
-
-            #region test data
-            var patientId = new PatientId(Guid.NewGuid());
-            var nameId = Guid.NewGuid();
-            var givenName1Id = Guid.NewGuid();
-            var givenName2Id = Guid.NewGuid();
-
-            modelBuilder.Entity<Patient>().HasData(new
-            {
-                Id = patientId,
-                Gender = Gender.Male,
-                BirthDate = new DateTime(1990, 1, 1),
-                Active = true
-            });
-
-            modelBuilder.Entity<Name>().HasData(new
-            {
-                Id = nameId,
-                PatientId = patientId,
-                Use = "use",
-                Family = "family"
-            });
-
-            modelBuilder.Entity<GivenName>().HasData(
-                new
-                {
-                    Id = givenName1Id,
-                    NameId = nameId,
-                    Value = "given1"
-                },
-                new
-                {
-                    Id = givenName2Id,
-                    NameId = nameId,
-                    Value = "given2"
-                }
-            );
-            #endregion
-
         }
     }
 }

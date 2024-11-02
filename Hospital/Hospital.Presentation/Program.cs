@@ -25,8 +25,4 @@ app.UseSwaggerUI(c =>
 
 app.MapPatientEndpoints();
 
-#if DEBUG
 app.Run();
-#else
-app.Run("http://*:80");
-#endif

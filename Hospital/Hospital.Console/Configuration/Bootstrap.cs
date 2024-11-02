@@ -36,7 +36,24 @@ namespace Hospital.Console.Configuration
             return host;
         }
 
-        public static void Run(IConfiguration configuration, IHost host)
+        public static IServiceProvider GetServices()
+        {
+            var serviceCollection = new ServiceCollection();
+
+            var httpClientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true // Ignore SSL errors
+            };
+
+            serviceCollection.AddHttpClient("UnsafeHttpClient")
+                .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            return serviceProvider;
+        }
+
+        public static async Task Run(IConfiguration configuration, IHost host, IServiceProvider serviceProvider)
         {
             bool isRunning = true;
 
@@ -44,7 +61,14 @@ namespace Hospital.Console.Configuration
             {
                 while (isRunning)
                 {
-                    System.Console.WriteLine($"\n\nType -s [amount] to seed database. Example: -s 100\n\nType -c to clear database.\n\nType -x to exit.\n\nCommand:");
+                    System.Console.WriteLine(
+                        "List of available commands\n" +
+                        "\n\n-s [amount] to seed database. Example: -s 100" +
+                        "\n\n-u [url] to specify api url for creating patient. Example -u https://localhost:5000/patients" +
+                        "\n\n-c to clear database." +
+                        "\n\n-x to exit." +
+                        "\n\nCommand:"
+                    );
 
                     var userInput = System.Console.ReadLine();
 
@@ -59,7 +83,14 @@ namespace Hospital.Console.Configuration
                     if (options.Seed > 0)
                     {
                         Seed.ClearDb(host);
-                        Seed.SeedDb(host, configuration, options.Seed);
+                        if (!string.IsNullOrEmpty(options.Url))
+                        {
+                            await Seed.SeedDbApi(serviceProvider, options);
+                        }
+                        else
+                        {
+                            Seed.SeedDbLocal(host, configuration, options);
+                        }
                     }
 
                     if (options.Clear)

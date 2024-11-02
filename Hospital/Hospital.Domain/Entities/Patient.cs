@@ -21,7 +21,8 @@ namespace Hospital.Domain.Entities
             ICollection<string> given,
             Gender gender,
             DateTime birthDate,
-            bool active)
+            bool active,
+            PatientId? id = null)
         {
 
             var givenNames = given.Select(GivenName.CreateNew).ToList();
@@ -29,7 +30,7 @@ namespace Hospital.Domain.Entities
 
             return new()
             {
-                Id = PatientId.New(),
+                Id = id != null ? id.Value : PatientId.New(),
                 Name = name,
                 Gender = gender,
                 BirthDate = birthDate,

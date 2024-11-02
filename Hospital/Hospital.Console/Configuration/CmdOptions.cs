@@ -4,6 +4,10 @@
     {
         // -s [amount]
         public int Seed { get; set; } = 0;
+
+        // -u api url
+        public string Url { get; set; }
+
         // -c
         public bool Clear { get; set; }
         // -x
@@ -32,6 +36,20 @@
                     else
                     {
                         options.Seed = 100;
+                    }
+                }
+                if (p == "-u")
+                {
+                    if (i + 1 < parts.Length)
+                    {
+                        if(!string.IsNullOrEmpty(parts[i + 1]))
+                        {
+                            options.Url = parts[i + 1];
+                            if (options.Seed == 0)
+                            {
+                                options.Seed = 100;
+                            }
+                        }
                     }
                 }
                 if (p == "-c")

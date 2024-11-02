@@ -8,6 +8,22 @@ namespace Hospital.Tests.Console
         [Test]
         public void Parse_Seed_Correct()
         {
+            string input = "-s 10";
+
+            var result = CmdOptions.Parse(input);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Seed, Is.EqualTo(10));
+                Assert.That(result.Url, Is.Null);
+                Assert.That(result.Clear, Is.False);
+                Assert.That(result.Exit, Is.False);
+            });
+        }
+
+        [Test]
+        public void Parse_SeedCustom_Correct()
+        {
             string input = "-s 100";
 
             var result = CmdOptions.Parse(input);
@@ -15,6 +31,39 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(100));
+                Assert.That(result.Url, Is.Null);
+                Assert.That(result.Clear, Is.False);
+                Assert.That(result.Exit, Is.False);
+            });
+        }
+
+        [Test]
+        public void Parse_Url_Correct()
+        {
+            string input = "-u https://localhost/patients";
+
+            var result = CmdOptions.Parse(input);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Seed, Is.EqualTo(100));
+                Assert.That(result.Url, Is.EqualTo("https://localhost/patients"));
+                Assert.That(result.Clear, Is.False);
+                Assert.That(result.Exit, Is.False);
+            });
+        }
+
+        [Test]
+        public void Parse_SeedUrl_Correct()
+        {
+            string input = "-s 10 -u https://localhost/patients";
+
+            var result = CmdOptions.Parse(input);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Seed, Is.EqualTo(10));
+                Assert.That(result.Url, Is.EqualTo("https://localhost/patients"));
                 Assert.That(result.Clear, Is.False);
                 Assert.That(result.Exit, Is.False);
             });
@@ -30,6 +79,7 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(100));
+                Assert.That(result.Url, Is.Null);
                 Assert.That(result.Clear, Is.False);
                 Assert.That(result.Exit, Is.False);
             });
@@ -45,6 +95,7 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(0));
+                Assert.That(result.Url, Is.Null);
                 Assert.That(result.Clear, Is.True);
                 Assert.That(result.Exit, Is.False);
             });
@@ -60,6 +111,7 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(0));
+                Assert.That(result.Url, Is.Null);
                 Assert.That(result.Exit, Is.True);
                 Assert.That(result.Clear, Is.False);
             });
@@ -75,6 +127,7 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(100));
+                Assert.That(result.Url, Is.Null);
                 Assert.That(result.Clear, Is.True);
                 Assert.That(result.Exit, Is.True);
             });
@@ -90,6 +143,7 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(0));
+                Assert.That(result.Url, Is.Null);
                 Assert.That(result.Clear, Is.False);
                 Assert.That(result.Exit, Is.False);
             });
@@ -105,6 +159,7 @@ namespace Hospital.Tests.Console
             Assert.Multiple(() =>
             {
                 Assert.That(result.Seed, Is.EqualTo(0));
+                Assert.That(result.Url, Is.Null);
                 Assert.That(result.Clear, Is.False);
                 Assert.That(result.Exit, Is.False);
             });
