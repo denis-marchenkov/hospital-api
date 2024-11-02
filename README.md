@@ -6,6 +6,9 @@
 - [Installation](#installation)
   - [Manual Installation](#manual-installation)
   - [Docker](#docker)
+- [Caveats](#caveats) 
+
+<br/>
 
 # Description
 
@@ -60,6 +63,8 @@ Patient record:
 ```
 
 ![Database](https://github.com/denis-marchenkov/assets-dump/blob/2b9407f530bed9395f2ea58729445f5df6cc531d/hospital_database.png)
+
+<br/>
 
 # Installation
 
@@ -139,6 +144,22 @@ Swagger url also changed and mapped to 5000 port (TLS amended):
 
 ```http://localhost:5000```
 
+<br/>
+
+# Caveats
+
+<br/>
+
+* Note that Search api accepting one argument - raw query string. It's a subject for a change but will suffice for now even though it creates inconveniences while using Postman. However it allows passing any number of filters.
+
+<br/>
+
+* While updating Patient keep in mind that the query ID is also duplicated in request body:
+![PatientUpdate](https://github.com/denis-marchenkov/assets-dump/blob/99b7257de82f6f6204227d19c0ea2f04acef5741/hospital_swagger_update_patient_caveat.png)
+ 
+<br/>
+<br/>
+<br/>
 <br/>
 
 - [Back To Top](#table-of-contents)
