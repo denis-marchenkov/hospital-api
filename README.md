@@ -35,6 +35,10 @@ There's a postman collection json file ```Patients.postman_collection.json``` av
 
 <br/>
 
+As per external limitations this project uses .net 6 so packages downgraded accordingly.
+
+<br/>
+
 # Data structure
 
 Patient record:
