@@ -12,7 +12,7 @@ namespace Hospital.Domain.Search.Filters.PatientFilters
         public SearchOperator Operator { get; }
         public object Value { get; }
 
-        // since approximation is is at the discretion of the system lets say it is 5 days
+        // since approximation is at the discretion of the system lets say it is 5 days
         public static double Approximation = 5;
 
         public BirthDateFilter(string name, SearchOperator op, object value)
